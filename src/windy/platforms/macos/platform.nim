@@ -1,8 +1,8 @@
 import ../../common, ../../internal, macdefs, opengl, pixie/fileformats/png,
     pixie/images, times, unicode, utils, vmath
 
-when not defined(windyNoHttp):
-  import ../../http 
+when defined(windyUseStdHttp):
+  import ../../http
   export http
 
 type
@@ -783,7 +783,7 @@ proc pollEvents*() =
       # forward event for app to handle
       NSApp.sendEvent(event)
 
-  when not defined(windyNoHttp):
+  when defined(windyUseStdHttp):
     pollHttp()
 
 proc makeContextCurrent*(window: Window) =

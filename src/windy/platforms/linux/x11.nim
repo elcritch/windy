@@ -1,7 +1,7 @@
 import ../../common, ../../internal, os, sequtils, sets, strformat, times,
     unicode, vmath, x11/glx, x11/keysym, x11/x, x11/xevent, x11/xlib, pixie
 
-when not defined(windyNoHttp):
+when defined(windyUseStdHttp):
   import ../../http
   export http
 
@@ -1013,10 +1013,11 @@ proc pollEvents*() =
 
   if clipboardWindow != 0:
     discard processClipboardEvents()
+
   for window in windows:
     pollEvents(window)
 
-  when not defined(windyNoHttp):
+  when defined(windyUseStdHttp):
     pollHttp()
 
 proc closeIme*(window: Window) =

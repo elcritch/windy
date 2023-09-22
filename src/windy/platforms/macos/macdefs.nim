@@ -156,14 +156,14 @@ var
   NSDefaultRunLoopMode* {.importc.}: NSRunLoopMode
 
 objc:
-  proc isKindOfClass*(self: NSObject, obj: Class): bool
+  proc isKindOfClass*(self: NSObject, x: Class): bool
   proc superclass*(self: NSObject): Class
   proc retain*(self: ID)
   proc release*(self: ID)
-  proc stringWithString*(class: typedesc[NSString], obj: NSString): NSString
+  proc stringWithString*(class: typedesc[NSString], x: NSString): NSString
   proc getBytes*(
     self: NSString,
-    obj: pointer,
+    x: pointer,
     maxLength: uint,
     usedLength: ptr uint,
     encoding: NSStringEncoding,
@@ -181,144 +181,142 @@ objc:
   proc keyCode*(self: NSEvent): uint16
   proc type*(self: NSEvent): NSEventType
   proc window*(self: NSEvent): NSWindow
-  proc dataWithBytes*(class: typedesc[NSData], obj: pointer, length: int): NSData
+  proc dataWithBytes*(class: typedesc[NSData], x: pointer, length: int): NSData
   proc length*(self: NSData): uint
   proc bytes*(self: NSData): pointer
   proc length*(self: NSString): uint
   proc array*(class: typedesc[NSArray]): NSArray
   proc count*(self: NSArray): uint
-  proc objectAtIndex*(self: NSArray, obj: uint): ID
-  proc containsObject*(self: NSArray, obj: ID): bool
+  proc objectAtIndex*(self: NSArray, x: uint): ID
+  proc containsObject*(self: NSArray, x: ID): bool
   proc screens*(class: typedesc[NSScreen]): NSArray
   proc frame*(self: NSScreen): NSRect
   proc frame*(self: NSWindow): NSRect
   proc frame*(self: NSView): NSRect
   proc generalPasteboard*(class: typedesc[NSPasteboard]): NSPasteboard
   proc types*(self: NSPasteboard): NSArray
-  proc stringForType*(self: NSPasteboard, obj: NSPasteboardType): NSString
-  proc dataForType*(self: NSPasteboard, obj: NSPasteboardType): NSData
+  proc stringForType*(self: NSPasteboard, x: NSPasteboardType): NSString
+  proc dataForType*(self: NSPasteboard, x: NSPasteboardType): NSData
   proc clearContents*(self: NSPasteboard)
-  proc setString*(self: NSPasteboard, obj: NSString, forType: NSPasteboardType)
+  proc setString*(self: NSPasteboard, x: NSString, forType: NSPasteboardType)
   proc processInfo*(class: typedesc[NSProcessInfo]): NSProcessInfo
   proc processName*(self: NSProcessInfo): NSString
   proc sharedApplication*(class: typedesc[NSApplication]): NSApplication
   proc setActivationPolicy*(
     self: NSApplication,
-    obj: NSApplicationActivationPolicy
+    x: NSApplicationActivationPolicy
   )
   proc setPresentationOptions*(
     self: NSApplication,
-    obj: NSApplicationPresentationOptions
+    x: NSApplicationPresentationOptions
   )
-  proc activateIgnoringOtherApps*(self: NSApplication, obj: bool)
-  proc setDelegate*(self: NSApplication, obj: ID)
-  proc setDelegate*(self: NSWindow, obj: ID)
-  proc setMainMenu*(self: NSApplication, obj: NSMenu)
+  proc activateIgnoringOtherApps*(self: NSApplication, x: bool)
+  proc setDelegate*(self: NSApplication, x: ID)
+  proc setDelegate*(self: NSWindow, x: ID)
+  proc setMainMenu*(self: NSApplication, x: NSMenu)
   proc finishLaunching*(self: NSApplication)
   proc nextEventMatchingMask*(
     self: NSApplication,
-    obj: NSEventMask,
+    x: NSEventMask,
     untilDate: NSDate,
     inMode: NSRunLoopMode,
     dequeue: bool
   ): NSEvent
-  proc sendEvent*(self: NSApplication, obj: NSEvent)
+  proc sendEvent*(self: NSApplication, x: NSEvent)
   proc distantPast*(class: typedesc[NSDate]): NSDate
-  proc addItem*(self: NSMenu, obj: NSMenuItem)
+  proc addItem*(self: NSMenu, x: NSMenuItem)
   proc initWithTitle*(
     self: NSMenuItem,
-    obj: NSString,
+    x: NSString,
     action: SEL,
     keyEquivalent: NSString
   ): NSMenuItem
-  proc setSubmenu*(self: NSMenuItem, obj: NSMenu)
+  proc setSubmenu*(self: NSMenuItem, x: NSMenu)
   proc initWithContentRect*(
     self: NSWindow,
-    obj: NSRect,
+    x: NSRect,
     styleMask: NSWindowStyleMask,
     backing: NSBackingStoreType,
     defer_mangle: bool
   ): NSWindow
-  proc orderFront*(self: NSWindow, obj: ID)
-  proc orderOut*(self: NSWindow, obj: ID)
-  proc setTitle*(self: NSWindow, obj: NSString)
+  proc orderFront*(self: NSWindow, x: ID)
+  proc orderOut*(self: NSWindow, x: ID)
+  proc setTitle*(self: NSWindow, x: NSString)
   proc close*(self: NSWindow)
   proc isVisible*(self: NSWindow): bool
-  proc miniaturize*(self: NSWindow, obj: ID)
-  proc deminiaturize*(self: NSWindow, obj: ID)
+  proc miniaturize*(self: NSWindow, x: ID)
+  proc deminiaturize*(self: NSWindow, x: ID)
   proc isMiniaturized*(self: NSWindow): bool
-  proc zoom*(self: NSWindow, obj: ID)
+  proc zoom*(self: NSWindow, x: ID)
   proc isZoomed*(self: NSWindow): bool
   proc isKeyWindow*(self: NSWindow): bool
   proc contentView*(self: NSWindow): NSView
-  proc contentRectForFrameRect*(self: NSWindow, obj: NSRect): NSRect
-  proc frameRectForContentRect*(self: NSWindow, obj: NSRect): NSRect
-  proc setFrame*(self: NSWindow, obj: NSRect, display: bool)
+  proc contentRectForFrameRect*(self: NSWindow, x: NSRect): NSRect
+  proc frameRectForContentRect*(self: NSWindow, x: NSRect): NSRect
+  proc setFrame*(self: NSWindow, x: NSRect, display: bool)
   proc screen*(self: NSWindow): NSScreen
-  proc setFrameOrigin*(self: NSWindow, obj: NSPoint)
-  proc setRestorable*(self: NSWindow, obj: bool)
-  proc setContentView*(self: NSWindow, obj: NSView)
-  proc makeFirstResponder*(self: NSWindow, obj: NSView): bool
-  proc firstResponder*(self: NSWindow): NSResponder
-  proc tryToPerform*(self: NSObject, obj: SEL, arg: NSObject): bool
+  proc setFrameOrigin*(self: NSWindow, x: NSPoint)
+  proc setRestorable*(self: NSWindow, x: bool)
+  proc setContentView*(self: NSWindow, x: NSView)
+  proc makeFirstResponder*(self: NSWindow, x: NSView): bool
   proc styleMask*(self: NSWindow): NSWindowStyleMask
-  proc setStyleMask*(self: NSWindow, obj: NSWindowStyleMask)
-  proc toggleFullscreen*(self: NSWindow, obj: ID)
-  proc invalidateCursorRectsForView*(self: NSWindow, obj: NSView)
+  proc setStyleMask*(self: NSWindow, x: NSWindowStyleMask)
+  proc toggleFullscreen*(self: NSWindow, x: ID)
+  proc invalidateCursorRectsForView*(self: NSWindow, x: NSView)
   proc mouseLocationOutsideOfEventStream*(self: NSWindow): NSPoint
   proc level*(self: NSWindow): NSWindowLevel
-  proc setLevel*(self: NSWindow, obj: NSWindowLevel)
-  proc convertRectToBacking*(self: NSView, obj: NSRect): NSRect
+  proc setLevel*(self: NSWindow, x: NSWindowLevel)
+  proc convertRectToBacking*(self: NSView, x: NSRect): NSRect
   proc window*(self: NSView): NSWindow
   proc bounds*(self: NSView): NSRect
-  proc removeTrackingArea*(self: NSView, obj: NSTrackingArea)
-  proc addTrackingArea*(self: NSView, obj: NSTrackingArea)
-  proc addCursorRect*(self: NSview, obj: NSRect, cursor: NSCursor)
+  proc removeTrackingArea*(self: NSView, x: NSTrackingArea)
+  proc addTrackingArea*(self: NSView, x: NSTrackingArea)
+  proc addCursorRect*(self: NSview, x: NSRect, cursor: NSCursor)
   proc inputContext*(self: NSView): NSTextInputContext
   proc initWithAttributes*(
     self: NSOpenGLPixelFormat,
-    obj: ptr NSOpenGLPixelFormatAttribute
+    x: ptr NSOpenGLPixelFormatAttribute
   ): NSOpenGLPixelFormat
   proc initWithFrame*(
     self: NSOpenGLView,
-    obj: NSRect,
+    x: NSRect,
     pixelFormat: NSOpenGLPixelFormat
   ): NSOpenGLView
   proc setWantsBestResolutionOpenGLSurface*(
     self: NSOpenGLView,
-    obj: bool
+    x: bool
   )
   proc openGLContext*(self: NSOpenGLView): NSOpenGLContext
   proc makeCurrentContext*(self: NSOpenGLContext)
   proc setValues*(
     self: NSOpenGLContext,
-    obj: ptr GLint,
+    x: ptr GLint,
     forParameter: NSOpenGLContextParameter
   )
   proc getValues*(
     self: NSOpenGLContext,
-    obj: ptr GLint,
+    x: ptr GLint,
     forParameter: NSOpenGLContextParameter
   )
   proc flushBuffer*(self: NSOpenGLContext)
   proc initWithRect*(
     self: NSTrackingArea,
-    obj: NSRect,
+    x: NSRect,
     options: NSTrackingAreaOptions,
     owner: ID,
     userInfo: ID
   ): NSTrackingArea
-  proc initWithData*(self: NSImage, obj: NSData): NSImage
-  proc initWithImage*(self: NSCursor, obj: NSImage, hotSpot: NSPoint): NSCursor
+  proc initWithData*(self: NSImage, x: NSData): NSImage
+  proc initWithImage*(self: NSCursor, x: NSImage, hotSpot: NSPoint): NSCursor
   proc discardMarkedText*(self: NSTextInputContext)
-  proc handleEvent*(self: NSTextInputContext, obj: NSEvent): bool
+  proc handleEvent*(self: NSTextInputContext, x: NSEvent): bool
   proc deactivate*(self: NSTextInputContext)
   proc activate*(self: NSTextInputContext)
-  proc insertText*(self: NSTextInputClient, obj: ID, replacementRange: NSRange)
-  proc initWithData*(self: NSBitmapImageRep, obj: NSData): NSBitmapImageRep
+  proc insertText*(self: NSTextInputClient, x: ID, replacementRange: NSRange)
+  proc initWithData*(self: NSBitmapImageRep, x: NSData): NSBitmapImageRep
   proc representationUsingType*(
     self: NSBitmapImageRep,
-    obj: NSBitmapImageFileType,
+    x: NSBitmapImageFileType,
     properties: NSDictionary
   ): NSData
 
