@@ -754,6 +754,15 @@ proc pollEvents*() =
 
   autoreleasepool:
     while true:
+      # we skip NSApplication keys here as the normal
+      # NSApplication misses keyUp events when
+      # command et al are held down
+      #
+      # see:
+      # - https://stackoverflow.com/questions/24099063/how-do-i-detect-keyup-in-my-nsview-with-the-command-key-held
+      # - https://lists.apple.com/archives/cocoa-dev/2003/Oct/msg00442.html
+      # - https://github.com/andlabs/ui/blob/bc848f5c4078b999dbe6ef1cd90e16290a0d1c3a/delegateuitask_darwin.m#L46
+      #
       let event = NSApp.nextEventMatchingMask(
         NSEventMaskAny,
         NSDate.distantPast,
@@ -762,6 +771,8 @@ proc pollEvents*() =
       )
       if event.int == 0:
         break
+      else:
+        echo "sending EVENT: ", event.int, " evt: ", event.`type`()
       NSApp.sendEvent(event)
 
   when not defined(windyNoHttp):

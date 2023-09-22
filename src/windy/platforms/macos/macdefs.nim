@@ -54,6 +54,7 @@ type
   NSMenuItem* = distinct NSObject
   NSProcessInfo* = distinct NSObject
   NSWindow* = distinct NSObject
+  NSResponder* = distinct NSObject
   NSView* = distinct NSObject
   NSOpenGLView* = distinct NSObject
   NSOpenGLPixelFormat* = distinct NSObject
@@ -109,6 +110,45 @@ const
   NSNormalWindowLevel* = 0.NSWindowLevel
   NSFloatingWindowLevel* = 3.NSWindowLevel
 
+type
+
+  NSEventType* = enum
+    NSEventTypeLeftMouseDown      = 1,
+    NSEventTypeLeftMouseUp        = 2,
+    NSEventTypeRightMouseDown     = 3,
+    NSEventTypeRightMouseUp       = 4,
+    NSEventTypeMouseMoved         = 5,
+    NSEventTypeLeftMouseDragged   = 6,
+    NSEventTypeRightMouseDragged  = 7,
+    NSEventTypeMouseEntered       = 8,
+    NSEventTypeMouseExited        = 9,
+    NSEventTypeKeyDown            = 10,
+    NSEventTypeKeyUp              = 11,
+    NSEventTypeFlagsChanged       = 12,
+    NSEventTypeAppKitDefined      = 13,
+    NSEventTypeSystemDefined      = 14,
+    NSEventTypeApplicationDefined = 15,
+    NSEventTypePeriodic           = 16,
+    NSEventTypeCursorUpdate       = 17,
+    NSEventTypeRotate             = 18,
+    NSEventTypeBeginGesture       = 19,
+    NSEventTypeEndGesture         = 20,
+    NSEventTypeScrollWheel        = 22,
+    NSEventTypeTabletPoint        = 23,
+    NSEventTypeTabletProximity    = 24,
+    NSEventTypeOtherMouseDown     = 25,
+    NSEventTypeOtherMouseUp       = 26,
+    NSEventTypeOtherMouseDragged  = 27,
+    NSEventTypeGesture            = 29,
+    NSEventTypeMagnify            = 30,
+    NSEventTypeSwipe              = 31,
+    NSEventTypeSmartMagnify       = 32,
+    NSEventTypeQuickLook          = 33,
+    NSEventTypePressure           = 34,
+    NSEventTypeDirectTouch        = 37
+
+
+
 var
   NSApp* {.importc.}: NSApplication
   NSPasteboardTypeString* {.importc.}: NSPasteboardType
@@ -139,6 +179,8 @@ objc:
   proc locationInWindow*(self: NSEvent): NSPoint
   proc buttonNumber*(self: NSEvent): int
   proc keyCode*(self: NSEvent): uint16
+  proc type*(self: NSEvent): NSEventType
+  proc window*(self: NSEvent): NSWindow
   proc dataWithBytes*(class: typedesc[NSData], obj: pointer, length: int): NSData
   proc length*(self: NSData): uint
   proc bytes*(self: NSData): pointer
@@ -217,6 +259,8 @@ objc:
   proc setRestorable*(self: NSWindow, obj: bool)
   proc setContentView*(self: NSWindow, obj: NSView)
   proc makeFirstResponder*(self: NSWindow, obj: NSView): bool
+  proc firstResponder*(self: NSWindow): NSResponder
+  proc tryToPerform*(self: NSObject, obj: SEL, arg: NSObject): bool
   proc styleMask*(self: NSWindow): NSWindowStyleMask
   proc setStyleMask*(self: NSWindow, obj: NSWindowStyleMask)
   proc toggleFullscreen*(self: NSWindow, obj: ID)
